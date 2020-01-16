@@ -1,0 +1,91 @@
+/*
+colors: https://paletton.com/#uid=13g0u0kcxf20auJ6qlMpkcvXEdx
+*/
+* {
+    margin:0;
+}
+
+body {
+    display: flex;
+}
+
+#sidebar {
+    /*background-color: #2D4A48;*/
+    background-color: black;
+    height: 100vh;
+    width: 18vw;
+}
+
+h1 {
+    margin:40px 0 0 30px;
+    color: #969696;
+    font-size: 40px;
+}
+
+p {
+    color: #969696;
+    font-size: 20px;
+    margin: 40px 30px 0 30px;
+}
+
+h2 {
+    color: #969696;
+    font-size: 30px;
+    margin: 40px 30px 0 30px;
+}
+
+#reset {
+    margin: 40px 30px 0 30px;
+    text-align: center;
+    height: 60px;
+    width: 160px;
+    font-size: 22px;
+}
+
+#gameHolder {
+    background-color: #969696;
+    width: 82vw;
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+}
+
+#startbtn {
+    color: #2D4A48;
+    width: 150px;
+    height: 10%;
+    font-size: 30px;
+    font-weight: bold;
+    border-color: #2D4A48;
+}
+
+.card {
+    width:20%;
+    height: 25%;
+    background-color: #969696;
+    box-shadow: 2px 2px inset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-weight:bold;
+}
+
+.hidden {
+    z-index: -1;
+}
+
+.match {
+    background-color: orange;
+    box-shadow: 2px 2px inset;
+}
+
+#finalScore {
+    color: #2D4A48;
+    z-index:1;
+}
