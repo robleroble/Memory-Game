@@ -36,22 +36,8 @@ function placeCards() {
     for (let i = 0; i < 20; i++) {
         const newCard = document.createElement('div');
         newCard.classList.add('card');
-        newCard.innerHTML = `<h3 class="hidden" data-num="${i}">${lettersArr[i]}</h3`;
+        newCard.innerHTML = `<h3 class="hidden" data-num="${i}">${lettersArr[i]}</h3>`;
         gameHolder.append(newCard);
-    }
-}
-
-function endGame() {
-    gameHolder.innerHTML = "";
-    const youWinBox = document.createElement("div");
-    youWinBox.innerHTML = `<h1 id="finalScore">You win with a score of ${yourScore.innerText}. Reset the board to play again!</h1>`;
-    gameHolder.append(youWinBox);
-    if (bestScore.innerText == 0) {
-        localStorage.setItem('bestScore', yourScore.innerText)
-        bestScore.innerText = yourScore.innerText;
-    } else if(bestScore.innerText > yourScore.innerText) {
-        localStorage.setItem('bestScore', yourScore.innerText)
-        bestScore.innerText = yourScore.innerText;
     }
 }
 
@@ -69,21 +55,24 @@ startBtn.addEventListener('click', function() {
     placeCards();
 })
 
-gameHolder.addEventListener('click', playGame);
+//clicking on gameHolder will trigger the playGame
+gameHolder.addEventListener('click', pickCards);
 
-function playGame(e) {
+function pickCards(e) {
     //This set of code sets card1 and card2 to the h3 element inside the card selected
-    if (e.target.tagName === "DIV" && card1 === null && e.target.firstChild.className === "hidden") {
+    if (card1 === null && e.target.firstChild.className === "hidden") {
         card1 = e.target.firstChild;
         e.target.firstChild.classList.toggle("hidden");
         yourScore.innerText++;
-    } else if (e.target.tagName === "DIV" && card1 !== null && card2 === null && e.target.firstElementChild.dataset.num !== card1.getAttribute("data-num") && e.target.firstChild.className === "hidden") {
+    } else if (card1 !== null && card2 === null && e.target.firstElementChild.dataset.num !== card1.getAttribute("data-num") && e.target.firstChild.className === "hidden") {
         card2 = e.target.firstChild;
         e.target.firstChild.classList.toggle("hidden");
         yourScore.innerText++;
+        checkCards();
     } 
-    
+}
     //Checks to see if the innerText of card1 and 2 match
+    function checkCards() {
     if (card1.innerText === card2.innerText) {
         card1.parentElement.classList.add('match');
         card2.parentElement.classList.add('match');
@@ -97,11 +86,25 @@ function playGame(e) {
             card2.classList.toggle("hidden");
             card1 = null;
             card2 = null;
-        }, 1000);
+        }, 500);
     }
 
     //ends game when all cards are flipped
     if (score == 10) {
         endGame()
+    }
+}
+
+function endGame() {
+    gameHolder.innerHTML = "";
+    const youWinBox = document.createElement("div");
+    youWinBox.innerHTML = `<h1 id="finalScore">You win with a score of ${yourScore.innerText}. Click 'Reset Game' to play again!</h1>`;
+    gameHolder.append(youWinBox);
+    if (bestScore.innerText == 0) {
+        localStorage.setItem('bestScore', yourScore.innerText)
+        bestScore.innerText = yourScore.innerText;
+    } else if(bestScore.innerText > yourScore.innerText) {
+        localStorage.setItem('bestScore', yourScore.innerText)
+        bestScore.innerText = yourScore.innerText;
     }
 }
