@@ -86,7 +86,7 @@ function pickCards(e) {
             card2.classList.toggle("hidden");
             card1 = null;
             card2 = null;
-        }, 500);
+        }, 1000);
     }
 
     //ends game when all cards are flipped
